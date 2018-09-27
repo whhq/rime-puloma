@@ -1,0 +1,88 @@
+# Rime schema settings
+# encoding: utf-8
+
+schema:
+  schema_id: plma
+  name: "普逻码单字"
+  version: "1.1"
+  author:
+    -  wang haiqing
+  description: |
+    普逻码用于商业用途需支付版权费。个人免费使用，学会后可资金支持一下发明人。
+    发明人：wang haiqing 
+    支付宝邮箱账号 plma756@hotmail.com 
+    项目网址: https://github.com/whhq/plmsrf
+  dependencies:
+    - puloma_simp
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    states: [ ，。, ，． ]
+  - name: extended_charset
+    states: [ 通用, 增廣 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+    - script_translator@puloma_simp   
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+
+
+  auto_select: true  # 顶字上屏
+  auto_select_unique_candidate: true # 无重码自动上屏
+ 
+  algebra:
+    - abbrev/^([a-z]).+$/$1/    
+    
+translator:
+  dictionary: plma
+  enable_charset_filter: true
+  enable_sentence: true
+  enable_encoder: true
+  encode_commit_history: true
+  max_phrase_length: 32
+  disable_user_dict_for_patterns:
+
+
+reverse_lookup:
+  dictionary: puloma_simp
+  prefix: "`"
+  suffix: "'"
+  tips: 〔拼音sp〕
+  preedit_format:
+
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "`[a-z]*'?$"

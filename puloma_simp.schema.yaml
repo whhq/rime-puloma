@@ -1,0 +1,77 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: puloma_simp
+  name: 普逻码双拼
+  version: "1.1"
+  author:
+    -  wang haiqing
+  description: |
+    普逻码用于商业用途需支付版权费。个人免费使用，学会后可资金支持一下发明人。
+    发明人：wang haiqing 
+    支付宝邮箱账号 plma756@hotmail.com 
+    项目网址: https://github.com/whhq/plmsrf
+  dependencies:
+    - plma
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    states: [ ，。, ，． ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - reverse_lookup_translator
+    - table_translator@plma
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+  algebra:
+    - abbrev/^([a-z]).+$/$1/
+   
+translator:
+  dictionary: puloma_simp
+  preedit_format:
+ 
+
+reverse_lookup:
+  dictionary: plma
+  enable_completion: true
+  prefix: "`"
+  suffix: "'"
+  tips: 〔plm〕
+  preedit_format:
+
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    reverse_lookup: "`[a-z]*'?$"
