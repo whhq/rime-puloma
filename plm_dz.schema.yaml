@@ -2,18 +2,15 @@
 # encoding: utf-8
 
 schema:
-  schema_id: plma
+  schema_id: plm_dz
   name: "普逻码单字"
-  version: "1.1"
+  version: "1.2"
   author:
-    -  wang haiqing
+    -  whhq
   description: |
-    普逻码用于商业用途需支付版权费。个人免费使用，学会后可资金支持一下发明人。
-    发明人：wang haiqing 
-    支付宝邮箱账号 plma756@hotmail.com 
-    项目网址: https://github.com/whhq/plmsrf
+    项目网址: https://github.com/whhq/
   dependencies:
-    - puloma_simp
+    - plm_sp
 
 switches:
   - name: ascii_mode
@@ -23,8 +20,6 @@ switches:
     states: [ 半角, 全角 ]
   - name: ascii_punct
     states: [ ，。, ，． ]
-  - name: extended_charset
-    states: [ 通用, 增廣 ]
 
 engine:
   processors:
@@ -46,34 +41,22 @@ engine:
     - punct_translator
     - reverse_lookup_translator
     - table_translator
-    - script_translator@puloma_simp   
+     
 speller:
   alphabet: zyxwvutsrqponmlkjihgfedcba
   delimiter: " '"
-
-
   auto_select: true  # 顶字上屏
-  auto_select_unique_candidate: true # 无重码自动上屏
- 
-  algebra:
-    - abbrev/^([a-z]).+$/$1/    
+  auto_select_unique_candidate: true  # 无重码自动上屏
+  
     
 translator:
-  dictionary: plma
-  enable_charset_filter: true
-  enable_sentence: true
-  enable_encoder: true
-  encode_commit_history: true
-  max_phrase_length: 32
-  disable_user_dict_for_patterns:
-
+  dictionary: plm_dz
 
 reverse_lookup:
-  dictionary: puloma_simp
-  prefix: "`"
+  dictionary: plm_sp
+  prefix: ";"
   suffix: "'"
-  tips: 〔拼音sp〕
-  preedit_format:
+  tips: 〔双拼〕
 
 
 punctuator:
@@ -85,4 +68,4 @@ key_binder:
 recognizer:
   import_preset: default
   patterns:
-    reverse_lookup: "`[a-z]*'?$"
+    reverse_lookup: ";[a-z]*'?$"

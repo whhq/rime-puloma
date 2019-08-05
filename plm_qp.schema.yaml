@@ -2,8 +2,8 @@
 # encoding: utf-8
 
 schema:
-  schema_id: plm_sp
-  name: 普逻码双拼
+  schema_id: plm_qp
+  name: 普逻码全拼
   version: "1.2"
   author:
     -  whq
@@ -49,13 +49,13 @@ speller:
   alphabet: zyxwvutsrqponmlkjihgfedcba
   delimiter: " '"
   algebra:
-    - derive/^i/sh/
-    - derive/^u/zh/
-    - derive/^v/ch/    
+#    - derive/^i/sh/
+#    - derive/^u/zh/
+#    - derive/^v/ch/    
     - abbrev/^([a-z]).+$/$1/
    
 translator:
-  dictionary: plm_sp
+  dictionary: plm_qp
   spelling_hints: 5
   
 reverse_lookup:
